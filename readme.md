@@ -29,6 +29,8 @@ new version 4.5
 PoolingHttpClientConnectionManager  leaseConnection()
 
 __buidler所完成的内容__
+
+```
 HttpClientBuilder
 	builde() 
 		publicSuffixMatcherCopy 域名前缀管理
@@ -38,6 +40,8 @@ HttpClientBuilder
 		ClientExecChain execChain	类型为MainClientExec，客户端执行链路，里面包含整个请求过程需要的实例，如上面创建的connManagerCopy、requestExecCopy等
 		HttpProcessor httpprocessorCopy	拦截器管理，内部是有一个双端链表linkedlist和hashmap<class, T>构成，key是自定义拦截器的类class，value是class的实例，linkedlist存的也是实例，搞不懂为什么两个里面都要存实例??????
 		将ClientExecChain、HttpProcessor两个再次封装为ProtocolExec类型的execChain实例，使用责任链模式，将execChain实例依次封装为类型RetryExec、ServiceUnavailableRetryExec、RedirectExec、BackoffStrategyExec，最后得到InternalHttpClient类型实例并返回，不知道为啥要这样做？？？？
+```
+
 post访问请求流程
 ```java
 CloseableHttpClient client = HttpClients.createDefault();
@@ -58,7 +62,7 @@ client.execute(post)会走到这里 InternalHttpClient.doExecute(HttpHost, HttpR
 ----重点----  每次request请求都会通过connectionManager的getconnection方法获取connection，而这个connection又是存放在AbstractConnPool这个线程池里面，通过线程安全去取到connection，connection里面包含了底层的tcp连接、发送和接收代码；而这个connection是什么时候添加到AbstractConnPool里面去的呢，是通过AbstractConnPool的getPoolEntryBlocking方法添加的，显示从这个方法去取，内部逻辑比较复杂，如果没取到connection并且这个pool也没有满的话就创建即可
 
 __总结的笔记__
-![biji](biji.jpeg)
+![biji](biji.png)
 
 [clent连接多线程管理][1]
 
