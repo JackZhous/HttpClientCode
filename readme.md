@@ -58,7 +58,7 @@ client.execute(post)会走到这里 InternalHttpClient.doExecute(HttpHost, HttpR
 ----重点----  每次request请求都会通过connectionManager的getconnection方法获取connection，而这个connection又是存放在AbstractConnPool这个线程池里面，通过线程安全去取到connection，connection里面包含了底层的tcp连接、发送和接收代码；而这个connection是什么时候添加到AbstractConnPool里面去的呢，是通过AbstractConnPool的getPoolEntryBlocking方法添加的，显示从这个方法去取，内部逻辑比较复杂，如果没取到connection并且这个pool也没有满的话就创建即可
 
 __总结的笔记__
-[!biji](biji.jpeg)
+![biji](biji.jpeg)
 
 [clent连接多线程管理][1]
 
