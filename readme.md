@@ -28,6 +28,7 @@ new version 4.5
 
 PoolingHttpClientConnectionManager  leaseConnection()
 
+__buidler所完成的内容__
 HttpClientBuilder
 	builde() 
 		publicSuffixMatcherCopy 域名前缀管理
@@ -56,4 +57,9 @@ client.execute(post)会走到这里 InternalHttpClient.doExecute(HttpHost, HttpR
 最底层的执行是在AbstractConnPool类的lease方法得到一个Future<T>的类型，T类型为CPoolEntry,AbstractConnPool里面有几个队列，set/list，大致表示线程可用、占用、阻塞的集合，该类里面还有一个map，里面有RouteSpecificPool东西，这个表示指定路由的线程集合，也就是说这个类里面存放相同路由的线程，也通AbstractConnPool有三个状态，每个线程；
 ----重点----  每次request请求都会通过connectionManager的getconnection方法获取connection，而这个connection又是存放在AbstractConnPool这个线程池里面，通过线程安全去取到connection，connection里面包含了底层的tcp连接、发送和接收代码；而这个connection是什么时候添加到AbstractConnPool里面去的呢，是通过AbstractConnPool的getPoolEntryBlocking方法添加的，显示从这个方法去取，内部逻辑比较复杂，如果没取到connection并且这个pool也没有满的话就创建即可
 
+__总结的笔记__
+[!biji](biji.jpeg)
 
+[clent连接多线程管理][1]
+
+[1]:https://segmentfault.com/a/1190000012009507
