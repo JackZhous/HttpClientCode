@@ -25,6 +25,7 @@ HttpPost向上继承并且实现了很多类，如HttpRequest、HttpUriRequest�
 AtomicReference<T> 对象操作为院子操作，多线程访问安全的
 new version 4.5
 
+9. 建造者模式  --- 简单说是实现一个对象，而掩藏其实现的内部细节，稳定性好，扩展性强，使用建造者模式有很大的共同性，差异较大的不适合用建造者模式；例如实现一个类需要为其配置诸多配置，建议使用建造者模式
 
 PoolingHttpClientConnectionManager  leaseConnection()
 
@@ -63,6 +64,11 @@ client.execute(post)会走到这里 InternalHttpClient.doExecute(HttpHost, HttpR
 
 __总结的笔记__
 ![biji](biji.png)
+
+
+### iot初稿
+
+![iot](iotclient_v1.0.png)
 
 [clent连接多线程管理][1]
 
